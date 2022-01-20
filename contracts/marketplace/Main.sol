@@ -217,7 +217,6 @@ contract Marketplace {
         require(tasks[_taskIndex].domainExpertise == evaluators[_evaluatorAddress].domainExpertise);
 
         tasks[_taskIndex].evaluatorAddress = _evaluatorAddress;
-        //! --- to transfer back ef
         tasks[_taskIndex].state = TaskState.FREELANCERS_APPLICATIONS;
     }
 
@@ -229,7 +228,7 @@ contract Marketplace {
         require(tasks[_taskIndex].applicationsCount >= _applicationIndex , "Freelancer does not exist");
 
         tasks[_taskIndex].freelancerAddress = taskApplications[_taskIndex][_applicationIndex];
-
+        //! --- to transfer back ef
         tasks[_taskIndex].state = TaskState.IN_PROGRESS;
     }
 
