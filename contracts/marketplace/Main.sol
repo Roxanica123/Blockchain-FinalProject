@@ -228,7 +228,13 @@ contract Marketplace {
         require(tasks[_taskIndex].applicationsCount >= _applicationIndex , "Freelancer does not exist");
 
         tasks[_taskIndex].freelancerAddress = taskApplications[_taskIndex][_applicationIndex];
-        //! --- to transfer back ef
+
+        for (uint256 i = 0; i < tasks[_taskIndex].applicationsCount; i++) {
+             require(token.transferFrom(address(this), taskApplications[_taskIndex][i], tasks[_taskIndex].evaluatorReward));
+            
+        }
+
+        tasks[_taskIndex].freelancerAddress = taskApplications[_taskIndex][_applicationIndex];
         tasks[_taskIndex].state = TaskState.IN_PROGRESS;
     }
 
@@ -245,6 +251,15 @@ contract Marketplace {
 
     }
 
+    function declareTaskFinished(uint256 _taskIndex)
+    external payable onlyFreelancer(){
+        require(_taskIndex < tasksCount, "Task index does not exist"); 
+        require(tasks[_taskIndex].state == TaskState.IN_PROGRESS, "The task was not in progres");
+        require(tasks[_taskIndex].freelancerAddress == msg.sender, "The task was not assigned to you");
+
+        tasks[_taskIndex].state = TaskState.WAITING_FOR_APPR0VAL;       
+    }
+
     function freelancerAppliedForTask(uint256 _taskIndex, address _freelancerAddress) private view returns (bool){
         require(_taskIndex < tasksCount, "Task index does not exist"); 
         
@@ -254,6 +269,72 @@ contract Marketplace {
             }
         }
         return false;
+    }
+
+    function approveTask(uint256 _taskIndex)
+    external payable onlyManager(){
+        require(_taskIndex < tasksCount, "Task index does not exist"); 
+        require(tasks[_taskIndex].state == TaskState.WAITING_FOR_APPR0VAL, "The task is not waiting for approval");
+        require(tasks[_taskIndex].managerAddress == msg.sender, "The task was created by you");
+
+        uint256 amount = tasks[_taskIndex].evaluatorReward * 2 + tasks[_taskIndex].freelancerReward; 
+        require(token.transferFrom(address(this), tasks[_taskIndex].freelancerAddress, amount));
+
+        if(freelancers[tasks[_taskIndex].freelancerAddress].reputation < 10){
+            freelancers[tasks[_taskIndex].freelancerAddress].reputation += 1;
+        }
+        tasks[_taskIndex].state = TaskState.APPROVED;       
+    }
+
+    function rejectTask(uint256 _taskIndex)
+    external payable onlyManager(){
+        require(_taskIndex < tasksCount, "Task index does not exist"); 
+        require(tasks[_taskIndex].state == TaskState.WAITING_FOR_APPR0VAL, "The task is not waiting for approval");
+        require(tasks[_taskIndex].managerAddress == msg.sender, "The task was created by you");
+
+        tasks[_taskIndex].state = TaskState.WAITING_FOR_ARBITRAGE;       
+    }
+
+    function approveTaskInArbitrage(uint256 _taskIndex)
+    external payable onlyEvaluator(){
+        require(_taskIndex < tasksCount, "Task index does not exist"); 
+        require(tasks[_taskIndex].state == TaskState.WAITING_FOR_ARBITRAGE, "The task is not waiting for approval");
+        require(tasks[_taskIndex].evaluatorAddress == msg.sender, "You are not the assigned evaluator");
+
+        require(token.transferFrom(address(this), tasks[_taskIndex].evaluatorAddress, tasks[_taskIndex].evaluatorReward));
+        require(token.transferFrom(address(this), tasks[_taskIndex].evaluatorAddress, tasks[_taskIndex].evaluatorReward + tasks[_taskIndex].freelancerReward));
+
+        if(freelancers[tasks[_taskIndex].freelancerAddress].reputation < 10){
+            freelancers[tasks[_taskIndex].freelancerAddress].reputation += 1;
+        }
+        tasks[_taskIndex].state = TaskState.APPROVED;        
+    }
+
+    function rejectTaskInArbitrage(uint256 _taskIndex)
+    external payable onlyEvaluator(){
+        require(_taskIndex < tasksCount, "Task index does not exist"); 
+        require(tasks[_taskIndex].state == TaskState.WAITING_FOR_ARBITRAGE, "The task is not waiting for approval");
+        require(tasks[_taskIndex].evaluatorAddress == msg.sender, "You are not the assigned evaluator");
+        
+        require(token.transferFrom(address(this), tasks[_taskIndex].evaluatorAddress, tasks[_taskIndex].evaluatorReward));
+        require(refundInvestors(_taskIndex));
+
+        if(freelancers[tasks[_taskIndex].freelancerAddress].reputation > 0){
+            freelancers[tasks[_taskIndex].freelancerAddress].reputation -= 1;
+        }
+        tasks[_taskIndex].state = TaskState.REJECTED;       
+    }
+
+    function refundInvestors(uint256 _taskIndex) private returns (bool){
+        
+        for (uint256 i = 0; i < tasks[_taskIndex].investorsCount; i++) {
+
+            if(taskFundings[_taskIndex][i].amount > 0){
+                require(token.transferFrom(address(this), taskFundings[_taskIndex][i].investorAddress, taskFundings[_taskIndex][i].amount));
+            }
+        }
+        return true;
+
     }
 
     
