@@ -12,7 +12,7 @@ contract Marketplace {
         bool exists;
     }
 
-    enum DomainExpertise {FRONTEND, BACKEND, WEB_DESIGN}
+    enum DomainExpertise {FRONTEND, BACKEND, WEB_DESIGN, NA}
 
     struct Freelancer{
         string  name;
@@ -33,6 +33,7 @@ contract Marketplace {
         bool exists;
     }
 
+    enum Role {INVESTOR, FREELANCER, EVALUATOR, MANAGER, OWNER, NONE}
     enum TaskState {WAITING_FOR_FUNDING, WAITING_FOR_EVALUATOR_ASSIGNMENT, FREELANCERS_APPLICATIONS, 
                     IN_PROGRESS, WAITING_FOR_APPR0VAL, WAITING_FOR_ARBITRAGE, APPROVED, REJECTED, DELETED}
 
@@ -97,6 +98,22 @@ contract Marketplace {
         owner = msg.sender;
         tasksCount = 0;
         token = MarketplaceToken(_tokenContractAddress);
+    }
+
+    function getUserRole(address _address) public view returns (Role){
+        if(managers[_address].exists){
+            return Role.MANAGER;
+        }
+        if(investors[_address].exists){
+            return Role.INVESTOR;
+        }
+        if(evaluators[_address].exists){
+            return Role.EVALUATOR;
+        }
+        if(freelancers[_address].exists){
+            return Role.FREELANCER;
+        }
+        return Role.NONE;
     }
 
     function addManager (string calldata _name, address _address) external {
