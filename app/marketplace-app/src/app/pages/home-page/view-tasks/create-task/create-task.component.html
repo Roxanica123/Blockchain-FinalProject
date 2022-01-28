@@ -1,1 +1,35 @@
-<p>create-task works!</p>
+<div>
+    <form>
+        <div fxLayout="column" fxLayoutAlign="space-around center" style="margin-top:2em;">
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label> Task description </mat-label>
+                <textarea required matInput placeholder="I want a blockchain project" name="description"
+                    [(ngModel)]="description"></textarea>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Freelancer Reward</mat-label>
+                <input required type="number" matInput min="1" (value)="freelancerReward" name="freelancerReward"
+                    [(ngModel)]="freelancerReward">
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Evaluator Reward</mat-label>
+                <input required type="number" matInput min="0" name='evaluatorReward' [(ngModel)]="evaluatorReward">
+            </mat-form-field>
+
+
+            <mat-form-field appearance="fill">
+                <mat-label>Domain expertise</mat-label>
+                <mat-select required  name='domainExpertise' [(ngModel)]="domainExpertise">
+                    <mat-option *ngFor="let food of [  'FRONTEND', 'BACKEND', 'WEB_DESIGN', 'NA']" [value]="food">
+                        {{food}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <button type="button" mat-raised-button color="accent" (click)="clickMe()">Add new task!</button>
+        </div>
+    </form>
+</div>
+
+

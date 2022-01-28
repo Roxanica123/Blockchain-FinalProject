@@ -17,8 +17,9 @@ import { JoinAppComponent } from './pages/home-page/join-app/join-app.component'
 import { ViewTasksComponent } from './pages/home-page/view-tasks/view-tasks.component';
 import { ViewSingleTaskComponent } from './pages/home-page/view-tasks/view-single-task/view-single-task.component';
 import { CreateTaskComponent } from './pages/home-page/view-tasks/create-task/create-task.component';
-
-
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +40,10 @@ import { CreateTaskComponent } from './pages/home-page/view-tasks/create-task/cr
     MatToolbarModule,
     MatDividerModule,
     MatListModule,
-    FlexLayoutModule 
+    FlexLayoutModule,
+    MatInputModule ,
+    MatSelectModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
