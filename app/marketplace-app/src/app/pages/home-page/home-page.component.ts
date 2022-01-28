@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ContractsService } from 'src/app/services/contracts.service';
-import { UserService } from 'src/app/services/user.service';
-import { DomainExpertise, EMPTY_USER, UserInfo } from 'src/app/types/user-info';
 
 
 @Component({

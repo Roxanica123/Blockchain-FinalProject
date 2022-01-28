@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ContractsService } from 'src/app/services/contracts.service';
 import { UserService } from 'src/app/services/user.service';
-import { DomainExpertise, EMPTY_USER, UserInfo } from 'src/app/types/user-info';
+import { DomainExpertise, UserInfo, USER_STATICS } from 'src/app/types/user-info';
 
 @Component({
   selector: 'app-join-app',
@@ -12,7 +12,7 @@ export class JoinAppComponent implements OnInit {
   private user: UserInfo;
 
   constructor(private readonly userService: UserService, private readonly contractsService: ContractsService) {
-    this.user = EMPTY_USER;
+    this.user = USER_STATICS.EMPTY_USER;
     userService.userObservable().subscribe((user: UserInfo) => this.user = user);
   }
 

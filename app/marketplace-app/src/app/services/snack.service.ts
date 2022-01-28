@@ -1,0 +1,24 @@
+import { Injectable } from "@angular/core";
+import { MatSnackBar } from "@angular/material/snack-bar";
+
+@Injectable({
+    providedIn: 'root'
+})
+export class SnackService {
+
+    constructor(private _snackBar: MatSnackBar) { }
+
+    public info(message: string): void {
+        this._snackBar.open(message, "", {
+            duration: 3000,
+            panelClass: ["snack-info"]
+        });
+    }
+
+    public error(message: string): void {
+        this._snackBar.open(message, "", {
+            duration: 3000,
+            panelClass: ["snack-error"]
+        });
+    }
+}

@@ -2,9 +2,6 @@ export enum Role {
     INVESTOR, FREELANCER, EVALUATOR, MANAGER, OWNER, NONE, UNAUTHORIZED
 }
 
-export const RoleString =  [ "INVESTOR", "FREELANCER", "EVALUATOR", "MANAGER", "OWNER",
- "NONE", "UNAUTHORIZED"] ;
-
 export enum DomainExpertise {
     FRONTEND, BACKEND, WEB_DESIGN, NA
 };
@@ -18,4 +15,7 @@ export interface UserInfo {
     reputation?: number;
 }
 
-export const EMPTY_USER: UserInfo = { address: "", role: Role.UNAUTHORIZED, name: "" }
+export class USER_STATICS {
+    public static EMPTY_USER: UserInfo = { address: "", role: Role.UNAUTHORIZED, name: "" };
+
+}

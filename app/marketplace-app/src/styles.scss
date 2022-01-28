@@ -32,3 +32,25 @@ body {
     display: flex;
     flex-direction: row;
 }
+
+.flex-center {
+    justify-content: center;
+}
+
+.flex-even {
+    justify-content: space-evenly;
+}
+
+.flex-between {
+    justify-content: space-between;
+}
+
+::ng-deep .snack-info {
+    background-color: rgb(23, 129, 23);
+    color: black;
+}
+
+::ng-deep .snack-error {
+    background-color: rgb(199, 21, 21);
+    color: white;
+}

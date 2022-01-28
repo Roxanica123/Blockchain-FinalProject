@@ -2,6 +2,8 @@ import { ConstantPool } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Role, UserInfo } from '../types/user-info';
+import { Evaluator, Freelancer, Investor, Manager } from '../types/user-types';
+import { ContractCallService } from './contracts-call.service';
 import { ContractsService } from './contracts.service';
 declare let window: any;
 
@@ -12,7 +14,9 @@ export class UserService {
 
   private readonly user: BehaviorSubject<UserInfo>;
 
-  constructor(private readonly contractsService: ContractsService) {
+  constructor(
+    private readonly contractsService: ContractsService,
+    private readonly txService: ContractCallService) {
     this.user = new BehaviorSubject<UserInfo>({ address: "", role: Role.NONE, name: "" });
 
     window.ethereum.on('accountsChanged', async (accs: string[]) => await this.updateUserInfo(accs[0]));
@@ -28,26 +32,32 @@ export class UserService {
   }
 
   public async updateUserInfo(address: string) {
-    const role: Role = await this.contractsService.marketplaceContract.methods['getUserRole'](address).call();
-    this.user.next(await this.addInfo(address, role));
+    const role: string = await this.contractsService.marketplaceContract.methods['getUserRole'](address).call();
+    this.user.next(await this.addInfo(address, Number(role)));
   }
 
   private async addInfo(address: string, role: Role): Promise<UserInfo> {
     switch (role) {
       case Role.MANAGER:
-        const managerInfo = await this.contractsService.marketplaceContract.methods['managers'](address).call();
+        const managerInfo = await this.txService.call<Manager>(this.mp, "managers", [address]);
+        console.log(managerInfo);
         return { address: address, role: role, name: managerInfo.name };
       case Role.INVESTOR:
-        const investorInfo = await this.contractsService.marketplaceContract.methods['investors'](address).call();
+        const investorInfo = await this.txService.call<Investor>(this.mp, "investors", [address]);
         return { address: address, role: role, name: investorInfo.name };
       case Role.EVALUATOR:
-        const evaluatorInfo = await this.contractsService.marketplaceContract.methods['evaluators'](address).call();
+        const evaluatorInfo = await this.txService.call<Evaluator>(this.mp, "evaluators", [address]);
         return { address: address, role: role, name: evaluatorInfo.name, domainExpertise: evaluatorInfo.domainExpertise };
       case Role.FREELANCER:
-        const freelancerInfo = await this.contractsService.marketplaceContract.methods['freelancers'](address).call();
+        const freelancerInfo = await this.txService.call<Freelancer>(this.mp, "freelancers", [address]);
         return { address: address, role: role, name: freelancerInfo.name, domainExpertise: freelancerInfo.domainExpertise };
       default:
+        console.log("big shit happen")
         return { address: address, role: role, name: "" }
     }
+  }
+
+  private get mp(): any {
+    return this.contractsService.marketplaceContract;
   }
 }

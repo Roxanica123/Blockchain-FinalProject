@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
-import { EMPTY_USER, Role, UserInfo, RoleString } from 'src/app/types/user-info';
+import { Role, UserInfo, USER_STATICS } from 'src/app/types/user-info';
 
 @Component({
   selector: 'app-top-header',
@@ -10,10 +10,10 @@ import { EMPTY_USER, Role, UserInfo, RoleString } from 'src/app/types/user-info'
 
 export class TopHeaderComponent {
 
-  private user: UserInfo;
+  public user: UserInfo;
 
   constructor(private readonly userService: UserService) {
-    this.user = EMPTY_USER;
+    this.user = USER_STATICS.EMPTY_USER;
 
     userService.userObservable().subscribe((user: UserInfo) => {
       this.user = user
@@ -30,6 +30,9 @@ export class TopHeaderComponent {
     return this.user.address !== "";
   }
 
+  public roleOf(role: Role):string {
+    return Role[role];
+  }
 }
 
 
