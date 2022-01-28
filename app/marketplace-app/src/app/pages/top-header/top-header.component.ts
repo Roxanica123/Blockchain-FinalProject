@@ -8,32 +8,25 @@ import { EMPTY_USER, Role, UserInfo, RoleString } from 'src/app/types/user-info'
   styleUrls: ['./top-header.component.scss']
 })
 
-
-
 export class TopHeaderComponent {
-  private user:UserInfo; 
-  public  show_user: UserInfo;
+  
+  private user: UserInfo;
+
+  public show_user: UserInfo;
   public user_is_loged = false;
-  public roleString : Array<String> = RoleString;
+  public roleString: Array<String> = RoleString;
 
   constructor(private readonly userService: UserService) {
     this.user = EMPTY_USER;
     this.show_user = EMPTY_USER;
 
-    userService.userObservable().subscribe((user: UserInfo) => 
-    {
+    userService.userObservable().subscribe((user: UserInfo) => {
       this.user_is_loged = true;
       this.user = user
       this.show_user = user;
-      console.log(this.show_user);
-
-      if( this.user_is_loged) {
-        this.userService.login();
-      }
-    
     });
 
-
+    userService.login();
   }
 
   public async initMetamask() {

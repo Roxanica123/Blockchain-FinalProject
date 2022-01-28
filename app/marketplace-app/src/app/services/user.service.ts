@@ -18,7 +18,7 @@ export class UserService {
     window.ethereum.on('accountsChanged', async (accs: string[]) => await this.updateUserInfo(accs[0]));
   }
 
-  async login(): Promise<void> {
+  public async login(): Promise<void> {
     const accs = await window.ethereum.request({ method: 'eth_requestAccounts' });
     await this.updateUserInfo(accs[0]);
   }
@@ -48,7 +48,6 @@ export class UserService {
         return { address: address, role: role, name: freelancerInfo.name, domainExpertise: freelancerInfo.domainExpertise };
       default:
         return { address: address, role: role, name: "" }
-        break;
     }
   }
 }
