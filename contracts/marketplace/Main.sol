@@ -164,7 +164,7 @@ contract Marketplace {
         //?require(token.approve(msg.sender, _amount));
         require(token.transferFrom(msg.sender, address(this), _amount));
 
-        uint256 investorIndex= investorIndexForTask(_taskIndex, msg.sender);
+        uint256 investorIndex = investorIndexForTask(_taskIndex, msg.sender);
         if(investorIndex == 0){
             taskFundings[_taskIndex][tasks[_taskIndex].investorsCount] = TaskFunding(msg.sender, _amount);
             tasks[_taskIndex].investorsCount += 1;
@@ -232,7 +232,6 @@ contract Marketplace {
         require(tasks[_taskIndex].managerAddress == msg.sender, "You did not create this task");
         require(evaluators[_evaluatorAddress].exists, "Evaluator does not exist");
         require(tasks[_taskIndex].domainExpertise == evaluators[_evaluatorAddress].domainExpertise);
-
         tasks[_taskIndex].evaluatorAddress = _evaluatorAddress;
         tasks[_taskIndex].state = TaskState.FREELANCERS_APPLICATIONS;
     }
@@ -248,7 +247,6 @@ contract Marketplace {
 
         for (uint256 i = 0; i < tasks[_taskIndex].applicationsCount; i++) {
              require(token.transferFrom(address(this), taskApplications[_taskIndex][i], tasks[_taskIndex].evaluatorReward));
-            
         }
 
         tasks[_taskIndex].freelancerAddress = taskApplications[_taskIndex][_applicationIndex];
@@ -265,7 +263,6 @@ contract Marketplace {
 
         taskApplications[_taskIndex][tasks[_taskIndex].applicationsCount] = msg.sender;
         tasks[_taskIndex].applicationsCount += 1;
-
     }
 
     function declareTaskFinished(uint256 _taskIndex)

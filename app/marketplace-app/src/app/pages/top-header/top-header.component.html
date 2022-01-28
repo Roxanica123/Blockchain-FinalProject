@@ -1,1 +1,72 @@
-<button mat-raised-button color="accent" (click)="initMetamask()">Connect to metamask</button>
+<p>
+
+
+    <mat-toolbar>
+        <mat-toolbar-row>
+            <span>MarketplaceApp</span>
+        </mat-toolbar-row>
+
+
+    </mat-toolbar>
+
+    <div *ngIf="user_is_loged; then thenBlock ekse elseBlock"></div>
+    <ng-template #thenBlock class="container">
+
+        <div fxLayout="row" fxLayoutAlign="center" fxLayoutGap="16px grid">
+  
+            <div *ngFor="let key of ['address','role','name','domainExpertise','reputation'] "> 
+   
+                <div *ngIf=" show_user[key]">
+
+                    <mat-card class="user_elem">
+                        <mat-card-subtitle style="text-transform:capitalize;">
+                            {{key}}
+                        </mat-card-subtitle>
+                        <mat-card-content>
+
+
+
+
+                        <div *ngIf="key != 'role'; else elseBlock">   <span> {{ show_user[key]  }}</span> </div>
+                        <ng-template #elseBlock></ng-template>
+                        <span> {{ roleString[show_user[key]]  }}</span> 
+                          
+                        </mat-card-content>
+                        </mat-card>
+
+                </div>
+
+              
+
+
+
+            </div>
+
+
+        
+            
+            <div *ngIf="show_user.domainExpertise; then domain_expertise"></div>
+
+            <ng-template #domain_expertise class="container">
+
+            <mat-card   class="asd cardPardding"> Domain Expertise : <span> {{ show_user.domainExpertise }}</span> </mat-card>
+            </ng-template>
+
+
+        </div>
+
+    </ng-template>
+
+    <ng-template #elseBlock>
+
+        <button mat-raised-button color="accent" (click)="initMetamask()">Connect to metamask</button>
+
+    </ng-template>   
+
+
+
+
+   
+
+
+
