@@ -9,21 +9,14 @@ import { EMPTY_USER, Role, UserInfo, RoleString } from 'src/app/types/user-info'
 })
 
 export class TopHeaderComponent {
-  
-  private user: UserInfo;
 
-  public show_user: UserInfo;
-  public user_is_loged = false;
-  public roleString: Array<String> = RoleString;
+  private user: UserInfo;
 
   constructor(private readonly userService: UserService) {
     this.user = EMPTY_USER;
-    this.show_user = EMPTY_USER;
 
     userService.userObservable().subscribe((user: UserInfo) => {
-      this.user_is_loged = true;
       this.user = user
-      this.show_user = user;
     });
 
     userService.login();
@@ -31,6 +24,10 @@ export class TopHeaderComponent {
 
   public async initMetamask() {
     this.userService.login();
+  }
+
+  public get loggedIn(): boolean {
+    return this.user.address !== "";
   }
 
 }
