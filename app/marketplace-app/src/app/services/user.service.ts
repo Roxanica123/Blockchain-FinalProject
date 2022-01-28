@@ -39,17 +39,16 @@ export class UserService {
   private async addInfo(address: string, role: Role): Promise<UserInfo> {
     switch (role) {
       case Role.MANAGER:
-        const managerInfo = await this.txService.call<Manager>(this.mp, "managers", [address]);
-        console.log(managerInfo);
+        const managerInfo = await this.txService.call<Manager>(this.mp, "getManager", [address]);
         return { address: address, role: role, name: managerInfo.name };
       case Role.INVESTOR:
-        const investorInfo = await this.txService.call<Investor>(this.mp, "investors", [address]);
+        const investorInfo = await this.txService.call<Investor>(this.mp, "getInvestor", [address]);
         return { address: address, role: role, name: investorInfo.name };
       case Role.EVALUATOR:
-        const evaluatorInfo = await this.txService.call<Evaluator>(this.mp, "evaluators", [address]);
+        const evaluatorInfo = await this.txService.call<Evaluator>(this.mp, "getEvaluator", [address]);
         return { address: address, role: role, name: evaluatorInfo.name, domainExpertise: evaluatorInfo.domainExpertise };
       case Role.FREELANCER:
-        const freelancerInfo = await this.txService.call<Freelancer>(this.mp, "freelancers", [address]);
+        const freelancerInfo = await this.txService.call<Freelancer>(this.mp, "getFreelancer", [address]);
         return { address: address, role: role, name: freelancerInfo.name, domainExpertise: freelancerInfo.domainExpertise };
       default:
         console.log("big shit happen")

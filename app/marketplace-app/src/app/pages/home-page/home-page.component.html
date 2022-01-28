@@ -1,0 +1,7 @@
+<div *ngIf="loggedIn; then createTask else joinApp"></div>
+<ng-template #createTask>
+    <app-create-task></app-create-task>
+</ng-template>
+<ng-template #joinApp>
+    <app-join-app></app-join-app>
+</ng-template>

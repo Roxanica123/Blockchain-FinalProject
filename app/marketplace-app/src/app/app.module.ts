@@ -18,7 +18,9 @@ import { ViewTasksComponent } from './pages/home-page/view-tasks/view-tasks.comp
 import { ViewSingleTaskComponent } from './pages/home-page/view-tasks/view-single-task/view-single-task.component';
 import { CreateTaskComponent } from './pages/home-page/view-tasks/create-task/create-task.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatDividerModule,
     MatListModule,
     FlexLayoutModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatInputModule ,
+    MatSelectModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
