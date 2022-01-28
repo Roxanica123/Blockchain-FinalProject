@@ -351,5 +351,31 @@ contract Marketplace {
 
     }
 
-    
+    function getTaskCount() public view returns ( uint256  ) {
+        return tasksCount;
+    } 
+
+    function getTask(uint256 taskId) public view returns ( Task memory) {
+        return tasks[taskId];
+    }
+
+    function getManager(address adr) public view returns ( Manager memory) {
+        return managers[adr];
+    }
+
+    function getFreelancer(address adr) public view returns ( Freelancer memory) {
+        return freelancers[adr];
+    }
+
+    function getEvaluator(address adr) public view returns ( Evaluator memory) {
+        return evaluators[adr];
+    }
+
+    function getInvestor(address adr) public view returns ( Investor memory) {
+        return investors[adr];
+    }
+
+
+
+
 }
