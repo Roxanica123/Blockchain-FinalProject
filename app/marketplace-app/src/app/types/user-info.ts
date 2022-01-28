@@ -1,5 +1,3 @@
-import { ResolveStart } from "@angular/router"
-
 export enum Role {
     INVESTOR, FREELANCER, EVALUATOR, MANAGER, OWNER, NONE, UNAUTHORIZED
 }

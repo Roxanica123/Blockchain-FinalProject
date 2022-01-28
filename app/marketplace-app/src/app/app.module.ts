@@ -13,13 +13,21 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { JoinAppComponent } from './pages/home-page/join-app/join-app.component';
+import { ViewTasksComponent } from './pages/home-page/view-tasks/view-tasks.component';
+import { ViewSingleTaskComponent } from './pages/home-page/view-tasks/view-single-task/view-single-task.component';
+import { CreateTaskComponent } from './pages/home-page/view-tasks/create-task/create-task.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     TopHeaderComponent,
-    HomePageComponent
+    HomePageComponent,
+    JoinAppComponent,
+    ViewTasksComponent,
+    ViewSingleTaskComponent,
+    CreateTaskComponent
   ],
   imports: [
     BrowserModule,

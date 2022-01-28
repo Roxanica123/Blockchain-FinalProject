@@ -10,7 +10,7 @@
   "sourceMap": "62:506:3:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;",
   "deployedSourceMap": "62:506:3:-:0;;;;;;;;",
   "source": "// SPDX-License-Identifier: MIT\r\n\r\npragma solidity ^0.8.0;\r\n\r\nlibrary SafeMath {\r\n\r\n    function sub(uint256 a, uint256 b) internal pure returns (uint256) {\r\n        assert(b <= a);\r\n        return a - b;\r\n    }\r\n\r\n    function add(uint256 a, uint256 b) internal pure returns (uint256) {\r\n        uint256 c = a + b;\r\n        assert(c >= a);\r\n        return c;\r\n\r\n    }\r\n    \r\n    function mul(uint256 a, uint256 b) internal pure returns (uint256) {\r\n        if (a == 0) return 0;\r\n        uint256 c = a * b;\r\n        require(c / a == b);\r\n        return c;\r\n    }\r\n\r\n}\r\n",
-  "sourcePath": "D:\\Facultate\\Master\\S1\\Block\\Proiect\\Blockchain-FinalProject\\contracts\\token\\SafeMath.sol",
+  "sourcePath": "/mnt/k/repos/Blockchain-FinalProject/contracts/token/SafeMath.sol",
   "ast": {
     "absolutePath": "project:/contracts/token/SafeMath.sol",
     "exportedSymbols": {
@@ -1963,7 +1963,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.4",
-  "updatedAt": "2022-01-28T12:31:00.412Z",
+  "updatedAt": "2022-01-28T20:24:39.816Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},
