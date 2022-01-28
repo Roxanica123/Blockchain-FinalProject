@@ -13,7 +13,7 @@ export class ContractsService {
   public readonly marketplaceTokenContract : any;
   
   constructor() {
-    this.web3 = new Web3(Web3.givenProvider || "ws://172.25.32.1:8545");
+    this.web3 = new Web3(Web3.givenProvider || "ws://127.0.0.1:8545");
     this.marketplaceContract = new this.web3.eth.Contract(Marketplace.abi as AbiItem[], Marketplace.networks["5777"].address);
     this.marketplaceTokenContract = new this.web3.eth.Contract(Token.abi as AbiItem[], Token.networks["5777"].address);
   }
