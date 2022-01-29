@@ -33,14 +33,13 @@ export class UserService {
 
   public async updateUserInfo(address: string) {
     const role: string = await this.contractsService.marketplaceContract.methods['getUserRole'](address).call();
-    console.log(role)
     this.user.next(await this.addInfo(address, Number(role)));
   }
 
   private async addInfo(address: string, role: Role): Promise<UserInfo> {
     switch (role) {
       case Role.MANAGER:
-        const managerInfo = await this.contractsService.marketplaceContract.methods["managers"](address).call();
+        const managerInfo = await this.txService.call<Manager>(this.mp, "managers", [address]);
         return { address: address, role: role, name: managerInfo.name };
       case Role.INVESTOR:
         const investorInfo = await this.txService.call<Investor>(this.mp, "investors", [address]);

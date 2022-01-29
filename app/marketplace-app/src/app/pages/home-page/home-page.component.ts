@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { Role, UserInfo, USER_STATICS } from 'src/app/types/user-info';
 
@@ -12,7 +13,9 @@ export class HomePageComponent implements OnInit {
 
   private user: UserInfo = USER_STATICS.EMPTY_USER;
 
-  constructor(private readonly userService: UserService) {
+  constructor(
+    private readonly userService: UserService,
+    private readonly router: Router) {
 
   }
 
@@ -22,5 +25,13 @@ export class HomePageComponent implements OnInit {
 
   public get loggedIn(): boolean {
     return this.user.role !== Role.NONE;
+  }
+
+  public get isManager(): boolean {
+    return this.user.role === Role.MANAGER;
+  }
+
+  public goToCreate(): void {
+    this.router.navigate(["create-task"]);
   }
 }
