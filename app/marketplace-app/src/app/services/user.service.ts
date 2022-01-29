@@ -41,11 +41,14 @@ export class UserService {
     switch (role) {
       case Role.MANAGER:
         // const managerInfo = await this.txService.call<Manager>(this.mp, "getManager", [address]);
-        console.log(address);
-        const managerInfo = await this.contractsService.marketplaceContract.methods.getManager(address).call({});
+        const cout = await this.contractsService.marketplaceContract.methods.tasksCount().call();
+
+        console.log(this.contractsService.marketplaceContract.methods.managers);
+        const managerInfo = await this.contractsService.marketplaceContract.methods["managers"](address).call();
+        console.log("rez = ", managerInfo);
         return { address: address, role: role, name: managerInfo.name };
       case Role.INVESTOR:
-        const investorInfo = await this.txService.call<Investor>(this.mp, "getInvestor", [address]);
+        const investorInfo = await this.txService.call<Investor>(this.mp, "investors", [address]);
         return { address: address, role: role, name: investorInfo.name };
       case Role.EVALUATOR:
         const evaluatorInfo = await this.txService.call<Evaluator>(this.mp, "getEvaluator", [address]);

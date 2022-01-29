@@ -57,16 +57,16 @@ contract Marketplace {
         uint amount;
     }
 
-    mapping (address => Manager) private managers;
-    mapping (address => Freelancer) private freelancers;
-    mapping (address => Evaluator) private evaluators;
-    mapping (address => Investor) private investors;
-    mapping (uint256 => Task) private tasks;
-    mapping (uint256 => mapping(uint256 => TaskFunding)) private taskFundings;
-    mapping (uint256 => mapping(uint256 => address)) private taskApplications;
+    mapping (address => Manager) public managers;
+    mapping (address => Freelancer) public freelancers;
+    mapping (address => Evaluator) public evaluators;
+    mapping (address => Investor) public investors;
+    mapping (uint256 => Task) public tasks;
+    mapping (uint256 => mapping(uint256 => TaskFunding)) public taskFundings;
+    mapping (uint256 => mapping(uint256 => address)) public taskApplications;
     
     address private owner;
-    uint256 private tasksCount;
+    uint256 public tasksCount;
     MarketplaceToken token;
 
     modifier onlyAdmin(){
@@ -350,32 +350,5 @@ contract Marketplace {
         return true;
 
     }
-
-    function getTaskCount() public view returns ( uint256  ) {
-        return tasksCount;
-    } 
-
-    function getTask(uint256 taskId) public view returns ( Task memory) {
-        return tasks[taskId];
-    }
-
-    function getManager(address adr) public view returns ( Manager memory) {
-        return managers[adr];
-    }
-
-    function getFreelancer(address adr) public view returns ( Freelancer memory) {
-        return freelancers[adr];
-    }
-
-    function getEvaluator(address adr) public view returns ( Evaluator memory) {
-        return evaluators[adr];
-    }
-
-    function getInvestor(address adr) public view returns ( Investor memory) {
-        return investors[adr];
-    }
-
-
-
 
 }
