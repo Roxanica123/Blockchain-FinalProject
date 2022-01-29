@@ -60,4 +60,8 @@ export class ViewSingleTaskComponent implements OnInit {
       public isEvaluator():boolean{
         return  this.user.role == Role.EVALUATOR;
       }
+
+      public isInvestor():boolean{
+        return  this.user.role == Role.INVESTOR;
+      }
 }

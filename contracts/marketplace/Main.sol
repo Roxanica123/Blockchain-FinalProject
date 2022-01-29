@@ -222,7 +222,6 @@ contract Marketplace {
         }
 
         tasks[_taskIndex].state = TaskState.DELETED;
-
     }
 
     function pickEvaluator (uint256 _taskIndex, address _evaluatorAddress)

@@ -112,8 +112,7 @@
     <div *ngIf="isFreelancer()">
 
         FREELANCER
-        <app-investor-action></app-investor-action>
-
+        <app-freelacer-action></app-freelacer-action>
     </div>
 
     <div *ngIf="isEvaluator()">
@@ -122,6 +121,11 @@
         <app-evaluator-action></app-evaluator-action>
     </div>
 
+    <div *ngIf="isInvestor()">
 
+        INVESTOR
+        <app-investor-action></app-investor-action>
+
+    </div>
 
 </div>

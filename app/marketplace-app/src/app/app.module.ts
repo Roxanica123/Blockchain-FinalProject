@@ -27,6 +27,7 @@ import { ManagerActionComponent } from './pages/home-page/view-tasks/view-single
 import { InvestorActionComponent } from './pages/home-page/view-tasks/view-single-task/investor-action/investor-action.component';
 import { EvaluatorActionComponent } from './pages/home-page/view-tasks/view-single-task/evaluator-action/evaluator-action.component';
 import { FreelacerActionComponent } from './pages/home-page/view-tasks/view-single-task/freelacer-action/freelacer-action.component';
+import { LoginComponent } from './pages/login/login.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { FreelacerActionComponent } from './pages/home-page/view-tasks/view-sing
     InvestorActionComponent,
     EvaluatorActionComponent,
     FreelacerActionComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
