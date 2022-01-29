@@ -38,6 +38,10 @@ export class UserService {
     this.ngZone.run(() => this.user.next(newUser));
   }
 
+  public async refresh(): Promise<void> {
+    await this.updateUserInfo(this.user.value.address);
+  }
+
   private async addInfo(address: string, role: Role): Promise<UserInfo> {
     switch (role) {
       case Role.MANAGER:
