@@ -1,4 +1,3 @@
-import { ConstantPool } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Role, UserInfo } from '../types/user-info';

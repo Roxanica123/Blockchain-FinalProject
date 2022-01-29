@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { Role, UserInfo, USER_STATICS } from 'src/app/types/user-info';
 
@@ -12,7 +13,9 @@ export class TopHeaderComponent {
 
   public user: UserInfo;
 
-  constructor(private readonly userService: UserService) {
+  constructor(
+    private readonly userService: UserService,
+    private readonly router: Router) {
     this.user = USER_STATICS.EMPTY_USER;
 
     userService.userObservable().subscribe((user: UserInfo) => {
@@ -30,8 +33,12 @@ export class TopHeaderComponent {
     return this.user.address !== "";
   }
 
-  public roleOf(role: Role):string {
+  public roleOf(role: Role): string {
     return Role[role];
+  }
+
+  public navigateHome(): void {
+    this.router.navigate([""]);
   }
 }
 

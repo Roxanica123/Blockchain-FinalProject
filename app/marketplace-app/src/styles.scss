@@ -35,6 +35,7 @@ body {
 
 .flex-center {
     justify-content: center;
+    align-items: center;
 }
 
 .flex-even {
@@ -45,12 +46,12 @@ body {
     justify-content: space-between;
 }
 
-::ng-deep .snack-info {
+.snack-info {
     background-color: rgb(23, 129, 23);
-    color: black;
+    color: white;
 }
 
-::ng-deep .snack-error {
+.snack-error {
     background-color: rgb(199, 21, 21);
     color: white;
 }

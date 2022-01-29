@@ -1,9 +1,12 @@
 <div *ngIf="loggedIn; then createTask else joinApp"></div>
 <ng-template #createTask>
-    <button *ngIf="isManager" mat-raised-button color="accent" (click)="goToCreate()">Create a task</button>
+    <div class="container flex-column flex-center">
+        <div class="button-container flex-row flex-start">
+            <button *ngIf="isManager" mat-raised-button color="accent" (click)="goToCreate()">Create a task</button>
+        </div>
+    </div>
     <app-view-tasks></app-view-tasks>
 </ng-template>
 <ng-template #joinApp>
     <app-join-app></app-join-app>
 </ng-template>
-

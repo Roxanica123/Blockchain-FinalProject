@@ -1,5 +1,5 @@
 <div>
-    <form>
+    <form #createForm="ngForm">
         <div fxLayout="column" fxLayoutAlign="space-around center" style="margin-top:2em;">
             <mat-form-field class="example-full-width" appearance="fill">
                 <mat-label> Task description </mat-label>
@@ -27,7 +27,7 @@
                     </mat-option>
                 </mat-select>
             </mat-form-field>
-            <button type="button" mat-raised-button color="accent" (click)="clickMe()">Add new task!</button>
+            <button type="button" mat-raised-button color="accent" (click)="submit(createForm)">Add new task!</button>
         </div>
     </form>
 </div>
