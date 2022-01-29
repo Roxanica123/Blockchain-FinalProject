@@ -26,7 +26,7 @@ export class ViewSingleTaskComponent implements OnInit {
             if (data !== undefined) {
                 this.task = data;
 
-
+                console.log(data);
             }
         });
 
