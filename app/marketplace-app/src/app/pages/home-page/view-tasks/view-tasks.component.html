@@ -1,99 +1,73 @@
-
-
-
-
-
-
-
 <button type="button" mat-raised-button color="accent" (click)="refreshtTask()">View all tasks</button>
-
-
-
-
-
 
 <table mat-table [dataSource]="data" class="mat-elevation-z8 demo-table">
 
-    <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
-    
-          <ng-container matColumnDef="description">
-            <th mat-header-cell *matHeaderCellDef> Description </th>
-            <td mat-cell *matCellDef="let element"> {{element.description}} </td>
-        </ng-container>
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef> Description </th>
+    <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+  </ng-container>
 
-        <ng-container matColumnDef="freelancerReward">
-            <th mat-header-cell *matHeaderCellDef> Freelancer Reward </th>
-            <td mat-cell *matCellDef="let element"> {{element.freelancerReward}} </td>
-        </ng-container>
+  <ng-container matColumnDef="freelancerReward">
+    <th mat-header-cell *matHeaderCellDef> Freelancer Reward </th>
+    <td mat-cell *matCellDef="let element"> {{element.freelancerReward}} </td>
+  </ng-container>
 
-        <ng-container matColumnDef="evaluatorReward">
-            <th mat-header-cell *matHeaderCellDef> Evaluator Reward </th>
-            <td mat-cell *matCellDef="let element"> {{element.evaluatorReward}} </td>
-        </ng-container>
+  <ng-container matColumnDef="evaluatorReward">
+    <th mat-header-cell *matHeaderCellDef> Evaluator Reward </th>
+    <td mat-cell *matCellDef="let element"> {{element.evaluatorReward}} </td>
+  </ng-container>
 
-        <ng-container matColumnDef="currentFunding">
-            <th mat-header-cell *matHeaderCellDef> Current Funding </th>
-            <td mat-cell *matCellDef="let element"> {{element.currentFunding}} </td>
-        </ng-container>
+  <ng-container matColumnDef="currentFunding">
+    <th mat-header-cell *matHeaderCellDef> Current Funding </th>
+    <td mat-cell *matCellDef="let element"> {{element.currentFunding}} </td>
+  </ng-container>
 
-        <ng-container matColumnDef="domainExpertise">
-            <th mat-header-cell *matHeaderCellDef> Domain Expertise </th>
-            <td mat-cell *matCellDef="let element"> {{element.domainExpertise}} </td>
-        </ng-container>
+  <ng-container matColumnDef="domainExpertise">
+    <th mat-header-cell *matHeaderCellDef> Domain Expertise </th>
+    <td mat-cell *matCellDef="let element"> {{element.domainExpertise}} </td>
+  </ng-container>
 
-        <ng-container matColumnDef="managerAddress">
-            <th mat-header-cell *matHeaderCellDef> Manager Address </th>
-            <td mat-cell *matCellDef="let element"> {{element.managerAddress}} </td>
-        </ng-container>
+  <ng-container matColumnDef="managerAddress">
+    <th mat-header-cell *matHeaderCellDef> Manager Address </th>
+    <td mat-cell *matCellDef="let element"> {{element.managerAddress}} </td>
+  </ng-container>
 
-        <ng-container matColumnDef="evaluatorAddress">
-            <th mat-header-cell *matHeaderCellDef>Evaluator Address </th>
-            <td mat-cell *matCellDef="let element"> {{element.evaluatorAddress}} </td>
-        </ng-container>
+  <ng-container matColumnDef="evaluatorAddress">
+    <th mat-header-cell *matHeaderCellDef>Evaluator Address </th>
+    <td mat-cell *matCellDef="let element"> {{element.evaluatorAddress}} </td>
+  </ng-container>
 
-        <ng-container matColumnDef="freelancerAddress">
-            <th mat-header-cell *matHeaderCellDef> Freelancer Address </th>
-            <td mat-cell *matCellDef="let element"> {{element.freelancerAddress}} </td>
-        </ng-container>
+  <ng-container matColumnDef="freelancerAddress">
+    <th mat-header-cell *matHeaderCellDef> Freelancer Address </th>
+    <td mat-cell *matCellDef="let element"> {{element.freelancerAddress}} </td>
+  </ng-container>
 
-        <ng-container matColumnDef="index">
-            <th mat-header-cell *matHeaderCellDef> Index </th>
-            <td mat-cell *matCellDef="let element"> {{element.index}} </td>
-        </ng-container>
+  <ng-container matColumnDef="index">
+    <th mat-header-cell *matHeaderCellDef> Index </th>
+    <td mat-cell *matCellDef="let element"> {{element.index}} </td>
+  </ng-container>
 
-        <ng-container matColumnDef="state">
-            <th mat-header-cell *matHeaderCellDef> State </th>
-            <td mat-cell *matCellDef="let element"> {{ getTaskState(element.state) }} </td>
-        </ng-container>
+  <ng-container matColumnDef="state">
+    <th mat-header-cell *matHeaderCellDef> State </th>
+    <td mat-cell *matCellDef="let element"> {{ getTaskState(element.state) }} </td>
+  </ng-container>
 
-        <ng-container matColumnDef="investorsCount">
-            <th mat-header-cell *matHeaderCellDef> Investors Count </th>
-            <td mat-cell *matCellDef="let element"> {{element.investorsCount}} </td>
-        </ng-container>
+  <ng-container matColumnDef="investorsCount">
+    <th mat-header-cell *matHeaderCellDef> Investors Count </th>
+    <td mat-cell *matCellDef="let element"> {{element.investorsCount}} </td>
+  </ng-container>
 
-        <ng-container matColumnDef="applicationsCount">
-            <th mat-header-cell *matHeaderCellDef> Applications Count </th>
-            <td mat-cell *matCellDef="let element"> {{element.applicationsCount}} </td>
-        </ng-container>
+  <ng-container matColumnDef="applicationsCount">
+    <th mat-header-cell *matHeaderCellDef> Applications Count </th>
+    <td mat-cell *matCellDef="let element"> {{element.applicationsCount}} </td>
+  </ng-container>
 
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="navigateToTask(row)"></tr>
 
+  <mat-paginator [pageSizeOptions]="[15, 25, 30]"
+                 showFirstLastButtons
+                 aria-label="Robert the blockchain">
+  </mat-paginator>
 
-         
-     
-
-         
-  
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-
-
-    <mat-paginator [pageSizeOptions]="[15, 25, 30]"
-    showFirstLastButtons 
-    aria-label="Select page of periodic elements">
-    </mat-paginator>
-
-
-  </table>
-
+</table>

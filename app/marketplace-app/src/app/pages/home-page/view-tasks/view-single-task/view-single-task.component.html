@@ -1,1 +1,7 @@
-<p>view-single-task works!</p>
+<div *ngIf="task === undefined">
+    <p>no task selected</p>
+</div>
+
+<div *ngIf="task !== undefined">
+    <p>selected task : {{task | json}}</p>
+</div>

@@ -29,7 +29,6 @@ export class Investor {
 
 
 export class ContractTask {
-
      description!: string;
      freelancerReward!: Number;
      evaluatorReward!: Number;

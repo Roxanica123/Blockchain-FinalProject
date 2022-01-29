@@ -1,6 +1,8 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ContractCallService } from 'src/app/services/contracts-call.service';
 import { ContractsService } from 'src/app/services/contracts.service';
+import { TaskStateService } from 'src/app/services/task-state.service';
 import { UserService } from 'src/app/services/user.service';
 import { TaskState } from 'src/app/types/user-info';
 import { ContractTask } from 'src/app/types/user-types';
@@ -15,30 +17,29 @@ export class ViewTasksComponent implements OnInit {
   constructor(
 
     private readonly txService: ContractCallService,
-    private readonly userService: UserService,
     private readonly contractsService: ContractsService,
-    private readonly changeDetectorRef: ChangeDetectorRef
+    private readonly taskState: TaskStateService
   ) {
 
     this.refreshtTask();
 
-   }
+  }
 
   ngOnInit(): void {
   }
 
-  public displayedColumns: string[] = ["applicationsCount" ,"currentFunding","description","domainExpertise","evaluatorReward", "freelancerReward","investorsCount","state"]
-  public data : ContractTask[] = [];
+  public displayedColumns: string[] = ["applicationsCount", "currentFunding", "description", "domainExpertise", "evaluatorReward", "freelancerReward", "investorsCount", "state"]
+  public data: ContractTask[] = [];
 
 
-  public async refreshtTask(){
+  public async refreshtTask() {
     //const count = await this.contractsService.marketplaceContract.methods["tasksCount"]().call();
 
-    const count = await this.txService.call<Number>(this.contractsService.marketplaceContract, "tasksCount",[]);
+    const count = await this.txService.call<Number>(this.contractsService.marketplaceContract, "tasksCount", []);
     console.log(count);
-    const local_data:ContractTask[] = []
-    for(let i = 0 ; i < count; i ++ ){
-      const task = await this.txService.call<ContractTask>(this.contractsService.marketplaceContract, "tasks",[i]);
+    const local_data: ContractTask[] = []
+    for (let i = 0; i < count; i++) {
+      const task = await this.txService.call<ContractTask>(this.contractsService.marketplaceContract, "tasks", [i]);
       local_data.push(task);
     }
 
@@ -49,7 +50,10 @@ export class ViewTasksComponent implements OnInit {
   }
 
 
-  public  getTaskState(ts: TaskState):string{
+  public getTaskState(ts: TaskState): string {
     return TaskState[ts];
+  }
+  public navigateToTask(task: ContractTask): void {
+    this.taskState.next(task);
   }
 }
