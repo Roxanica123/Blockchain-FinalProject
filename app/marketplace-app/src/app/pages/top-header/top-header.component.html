@@ -5,11 +5,11 @@
 
     <div *ngIf="loggedIn" class="user-info-container flex-column flex-start">
         <div class="user-info">
-            <label>Name</label>
+            <label>Name:</label>
             {{user.name}}
         </div>
         <div class="user-info">
-            <label>Role</label>
+            <label>Role:</label>
             {{roleOf(user.role)}}
         </div>
     </div>
