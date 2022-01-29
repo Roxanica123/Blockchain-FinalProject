@@ -6,6 +6,9 @@ export enum DomainExpertise {
     FRONTEND, BACKEND, WEB_DESIGN, NA
 };
 
+export enum TaskState {WAITING_FOR_FUNDING, WAITING_FOR_EVALUATOR_ASSIGNMENT, FREELANCERS_APPLICATIONS, 
+    IN_PROGRESS, WAITING_FOR_APPR0VAL, WAITING_FOR_ARBITRAGE, APPROVED, REJECTED, DELETED}
+
 export interface UserInfo {
     [key: string]: any;
     address: string;
