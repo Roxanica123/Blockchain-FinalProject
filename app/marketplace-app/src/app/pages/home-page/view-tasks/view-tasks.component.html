@@ -39,7 +39,7 @@
 
         <ng-container matColumnDef="domainExpertise">
             <th mat-header-cell *matHeaderCellDef> Domain Expertise </th>
-            <td mat-cell *matCellDef="let element"> {{element.domainExpertise}} </td>
+            <td mat-cell *matCellDef="let element"> {{ getDomainExpertize(element.domainExpertise) }} </td>
         </ng-container>
 
         <ng-container matColumnDef="managerAddress">

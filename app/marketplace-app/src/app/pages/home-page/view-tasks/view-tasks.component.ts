@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ContractCallService } from 'src/app/services/contracts-call.service';
 import { ContractsService } from 'src/app/services/contracts.service';
 import { UserService } from 'src/app/services/user.service';
-import { TaskState } from 'src/app/types/user-info';
+import { TaskState, DomainExpertise } from 'src/app/types/user-info';
 import { ContractTask } from 'src/app/types/user-types';
 
 @Component({
@@ -51,5 +51,10 @@ export class ViewTasksComponent implements OnInit {
 
   public  getTaskState(ts: TaskState):string{
     return TaskState[ts];
+  }
+
+
+  public  getDomainExpertize(ts: DomainExpertise):string{
+    return DomainExpertise[ts];
   }
 }
