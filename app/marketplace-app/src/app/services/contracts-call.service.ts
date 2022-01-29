@@ -17,6 +17,7 @@ export class ContractCallService {
     public async call<T>(contract: any, method: string, methodArguments: any[]): Promise<T> {
         try {
             console.log(contract.methods)
+            console.log(methodArguments);
             return await this.TryThreeTimes(async () => await contract.methods[method](...methodArguments).call());
         }
         catch (err: any) {
