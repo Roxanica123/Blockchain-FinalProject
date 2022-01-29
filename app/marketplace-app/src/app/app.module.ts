@@ -23,6 +23,10 @@ import {MatSelectModule} from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
+import { ManagerActionComponent } from './pages/home-page/view-tasks/view-single-task/manager-action/manager-action.component';
+import { InvestorActionComponent } from './pages/home-page/view-tasks/view-single-task/investor-action/investor-action.component';
+import { EvaluatorActionComponent } from './pages/home-page/view-tasks/view-single-task/evaluator-action/evaluator-action.component';
+import { FreelacerActionComponent } from './pages/home-page/view-tasks/view-single-task/freelacer-action/freelacer-action.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +37,10 @@ import {MatTableModule} from '@angular/material/table';
     ViewTasksComponent,
     ViewSingleTaskComponent,
     CreateTaskComponent,
+    ManagerActionComponent,
+    InvestorActionComponent,
+    EvaluatorActionComponent,
+    FreelacerActionComponent,
   ],
   imports: [
     BrowserModule,

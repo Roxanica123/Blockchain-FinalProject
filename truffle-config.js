@@ -49,9 +49,8 @@ module.exports = {
      },
     
     develop: {
+      host: "localhost",
       port: 8545,
-	   gas: 0xfffffffffff,	// <-- Use this high gas value
-		gasPrice: 0x01,	// <-- Use this low gas price
     },
 
     // Another network with more advanced options...

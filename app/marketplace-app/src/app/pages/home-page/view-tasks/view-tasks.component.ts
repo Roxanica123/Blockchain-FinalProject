@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TaskStateService } from 'src/app/services/task-state.service';
-import { TaskState, DomainExpertise } from 'src/app/types/user-info';
+import { UserService } from 'src/app/services/user.service';
+import { TaskState, DomainExpertise, UserInfo, USER_STATICS, Role } from 'src/app/types/user-info';
 import { ContractTask } from 'src/app/types/user-types';
 
 @Component({
@@ -10,13 +11,18 @@ import { ContractTask } from 'src/app/types/user-types';
 })
 export class ViewTasksComponent implements OnInit {
 
+
   public displayedColumns: string[] = ["applicationsCount", "currentFunding", "description", "domainExpertise", "evaluatorReward", "freelancerReward", "investorsCount", "state"]
   public data: ContractTask[] = [];
 
-  constructor(private readonly taskState: TaskStateService) { }
+  constructor(private readonly taskState: TaskStateService,) {
+    
+  }
 
   ngOnInit(): void {
     this.taskState.dataObservable.subscribe(data => this.data = data);
+
+
   }
 
   public getTaskState(ts: TaskState): string {
@@ -30,4 +36,11 @@ export class ViewTasksComponent implements OnInit {
   public getDomainExpertize(ts: DomainExpertise): string {
     return DomainExpertise[ts];
   }
+
+
+
+
+
+
+
 }
