@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Role, UserInfo } from '../types/user-info';
 import { Evaluator, Freelancer, Investor, Manager } from '../types/user-types';
@@ -15,10 +15,12 @@ export class UserService {
 
   constructor(
     private readonly contractsService: ContractsService,
-    private readonly txService: ContractCallService) {
+    private readonly txService: ContractCallService,
+    private readonly ngZone: NgZone) {
     this.user = new BehaviorSubject<UserInfo>({ address: "", role: Role.NONE, name: "" });
 
-    window.ethereum.on('accountsChanged', async (accs: string[]) => await this.updateUserInfo(accs[0]));
+    window.ethereum.on('accountsChanged', async (accs: string[]) => await this.login());
+    this.login();
   }
 
   public async login(): Promise<void> {
@@ -32,7 +34,8 @@ export class UserService {
 
   public async updateUserInfo(address: string) {
     const role: string = await this.contractsService.marketplaceContract.methods['getUserRole'](address).call();
-    this.user.next(await this.addInfo(address, Number(role)));
+    const newUser = await this.addInfo(address, Number(role));
+    this.ngZone.run(() => this.user.next(newUser));
   }
 
   private async addInfo(address: string, role: Role): Promise<UserInfo> {

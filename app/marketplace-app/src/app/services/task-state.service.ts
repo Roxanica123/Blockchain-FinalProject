@@ -60,8 +60,6 @@ export class TaskStateService {
             temp.push(res);
         }
         this.tasks.next(temp);
-
-        console.log(temp);
     }
 
     private async getTask(index: Number): Promise<ContractTask> {

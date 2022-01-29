@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { Role, UserInfo, USER_STATICS } from 'src/app/types/user-info';
@@ -9,28 +9,26 @@ import { Role, UserInfo, USER_STATICS } from 'src/app/types/user-info';
   styleUrls: ['./top-header.component.scss']
 })
 
-export class TopHeaderComponent {
+export class TopHeaderComponent implements OnInit {
 
-  public user: UserInfo;
+  private _user: UserInfo = USER_STATICS.EMPTY_USER;
+
 
   constructor(
     private readonly userService: UserService,
-    private readonly router: Router) {
-    this.user = USER_STATICS.EMPTY_USER;
+    private readonly router: Router) { }
 
-    userService.userObservable().subscribe((user: UserInfo) => {
-      this.user = user
+  public ngOnInit(): void {
+    this.userService.userObservable().subscribe((user: UserInfo) => {
+      this._user = user;
     });
-
-    userService.login();
   }
 
-  public async initMetamask() {
-    this.userService.login();
+  public get user(): UserInfo {
+    return this._user;
   }
-
   public get loggedIn(): boolean {
-    return this.user.address !== "";
+    return this._user.address !== "";
   }
 
   public roleOf(role: Role): string {

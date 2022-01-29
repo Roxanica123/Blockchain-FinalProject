@@ -23,6 +23,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { FormsModule } from '@angular/forms';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableModule} from '@angular/material/table';
+import { LoginComponent } from './pages/login/login.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import {MatTableModule} from '@angular/material/table';
     ViewTasksComponent,
     ViewSingleTaskComponent,
     CreateTaskComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
