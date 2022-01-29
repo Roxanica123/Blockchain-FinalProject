@@ -22,7 +22,7 @@
             <mat-form-field appearance="fill">
                 <mat-label>Domain expertise</mat-label>
                 <mat-select required  name='domainExpertise' [(ngModel)]="domainExpertise">
-                    <mat-option *ngFor="let food of [  'FRONTEND', 'BACKEND', 'WEB_DESIGN', 'NA']" [value]="food">
+                    <mat-option *ngFor="let food of domains" [value]="food">
                         {{food}}
                     </mat-option>
                 </mat-select>

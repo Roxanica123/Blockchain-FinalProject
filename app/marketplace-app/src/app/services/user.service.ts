@@ -45,10 +45,10 @@ export class UserService {
         const investorInfo = await this.txService.call<Investor>(this.mp, "investors", [address]);
         return { address: address, role: role, name: investorInfo.name };
       case Role.EVALUATOR:
-        const evaluatorInfo = await this.txService.call<Evaluator>(this.mp, "getEvaluator", [address]);
+        const evaluatorInfo = await this.txService.call<Evaluator>(this.mp, "evaluators", [address]);
         return { address: address, role: role, name: evaluatorInfo.name, domainExpertise: evaluatorInfo.domainExpertise };
       case Role.FREELANCER:
-        const freelancerInfo = await this.txService.call<Freelancer>(this.mp, "getFreelancer", [address]);
+        const freelancerInfo = await this.txService.call<Freelancer>(this.mp, "freelancers", [address]);
         return { address: address, role: role, name: freelancerInfo.name, domainExpertise: freelancerInfo.domainExpertise };
       default:
         console.log("big shit happen")
