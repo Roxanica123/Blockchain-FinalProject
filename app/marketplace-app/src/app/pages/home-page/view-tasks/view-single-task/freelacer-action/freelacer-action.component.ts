@@ -12,4 +12,12 @@ export class FreelacerActionComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
+  public applyForATask( _taskIndex : number) {
+
+  }
+
+  public declareTaskFinished(taskIndex: number) {
+
+  }
 }
