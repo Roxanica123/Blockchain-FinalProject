@@ -40,21 +40,16 @@ export class UserService {
   private async addInfo(address: string, role: Role): Promise<UserInfo> {
     switch (role) {
       case Role.MANAGER:
-        // const managerInfo = await this.txService.call<Manager>(this.mp, "getManager", [address]);
-        const cout = await this.contractsService.marketplaceContract.methods.tasksCount().call();
-
-        console.log(this.contractsService.marketplaceContract.methods.managers);
         const managerInfo = await this.contractsService.marketplaceContract.methods["managers"](address).call();
-        console.log("rez = ", managerInfo);
         return { address: address, role: role, name: managerInfo.name };
       case Role.INVESTOR:
         const investorInfo = await this.txService.call<Investor>(this.mp, "investors", [address]);
         return { address: address, role: role, name: investorInfo.name };
       case Role.EVALUATOR:
-        const evaluatorInfo = await this.txService.call<Evaluator>(this.mp, "getEvaluator", [address]);
+        const evaluatorInfo = await this.txService.call<Evaluator>(this.mp, "evaluators", [address]);
         return { address: address, role: role, name: evaluatorInfo.name, domainExpertise: evaluatorInfo.domainExpertise };
       case Role.FREELANCER:
-        const freelancerInfo = await this.txService.call<Freelancer>(this.mp, "getFreelancer", [address]);
+        const freelancerInfo = await this.txService.call<Freelancer>(this.mp, "freelancers", [address]);
         return { address: address, role: role, name: freelancerInfo.name, domainExpertise: freelancerInfo.domainExpertise };
       default:
         console.log("big shit happen")
