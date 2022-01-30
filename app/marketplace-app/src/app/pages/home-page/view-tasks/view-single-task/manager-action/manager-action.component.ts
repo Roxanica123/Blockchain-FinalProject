@@ -57,14 +57,14 @@ export class ManagerActionComponent implements OnInit, OnDestroy {
     await this.tx.send(this.contracts.marketplaceContract, "pickFreelancer", [this.task!.index, user.applicationIndex], this.user.address);
     await this.taskState.updateTaskWithIndex(this.task!.index);
 
-    this.snack.info(`Freelancer ${user.name} with expertise ${Role[Number(user.domainExpertise!)]} has been accepted`)
+    this.snack.info(`Freelancer ${user.name} with expertise ${DomainExpertise[Number(user.domainExpertise!)]} has been accepted`)
   }
 
   public async selectEvaluator(user: Evaluator): Promise<void> {
     console.log(user);
     await this.tx.send(this.contracts.marketplaceContract, "pickEvaluator", [this.task!.index, user.evaluatorAddress], this.user.address);
     await this.taskState.updateTaskWithIndex(this.task!.index);
-    this.snack.info(`Evaluator ${user.name} with reputation has been selected`);
+    this.snack.info(`Evaluator ${user.name} has been selected`);
   }
 
   public roleOf(role: DomainExpertise): string {
