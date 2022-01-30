@@ -1,5 +1,5 @@
 .user-info {
-  margin: 12px;
+  margin: 20px;
 }
 
 .user-info-container {
@@ -10,4 +10,14 @@
 .site-label {
   margin-left: 16px;
   cursor: pointer;
+}
+
+.buy-tokens-container{
+  align-items: center;
+}
+.tokens-container{
+  align-items: center;
+  div{
+    padding: 10px;
+  }
 }
