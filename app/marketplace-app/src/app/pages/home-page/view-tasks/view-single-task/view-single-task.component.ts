@@ -15,7 +15,7 @@ export class ViewSingleTaskComponent implements OnInit {
     public user: UserInfo;
 
 
-    public displayInfo: string[] = ["applicationsCount", "currentFunding", "description", "domainExpertise", "evaluatorReward", "freelancerReward", "investorsCount", "state"]
+    public displayInfo: string[] = ["index","applicationsCount", "investorsCount", "currentFunding", "description", "domainExpertise", "evaluatorReward", "freelancerReward",  "state"]
     public displayedAddress: string[] = ["evaluatorAddress","freelancerAddress","managerAddress"]
 
     
@@ -25,8 +25,6 @@ export class ViewSingleTaskComponent implements OnInit {
         taskState.asObservable.subscribe((data: ContractTask | undefined) => {
             if (data !== undefined) {
                 this.task = data;
-
-                console.log(data);
             }
         });
 
