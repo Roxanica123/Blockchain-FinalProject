@@ -54,7 +54,7 @@ export class JoinAppComponent implements OnInit {
         await this.tx.send(this.mp, "addManager", [this.name, this.user.address], this.user.address);
         break;
       case Role.EVALUATOR:
-        await this.tx.send(this.mp, "addManager", [this.name, this.domains.indexOf(this.domainExpertise), this.user.address], this.user.address);
+        await this.tx.send(this.mp, "addEvaluator", [this.name, this.domains.indexOf(this.domainExpertise), this.user.address], this.user.address);
         break;
       case Role.FREELANCER:
         await this.tx.send(this.mp, "addFreelancer", [this.name, this.domains.indexOf(this.domainExpertise), this.user.address], this.user.address);
