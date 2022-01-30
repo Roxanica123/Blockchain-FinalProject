@@ -321,7 +321,7 @@ contract Marketplace {
         require(tasks[_taskIndex].evaluatorAddress == msg.sender);
         token.approve(address(this), tasks[_taskIndex].evaluatorReward + tasks[_taskIndex].evaluatorReward + tasks[_taskIndex].freelancerReward);
         require(token.transferFrom(address(this), tasks[_taskIndex].evaluatorAddress, tasks[_taskIndex].evaluatorReward));
-        require(token.transferFrom(address(this), tasks[_taskIndex].evaluatorAddress, tasks[_taskIndex].evaluatorReward + tasks[_taskIndex].freelancerReward));
+        require(token.transferFrom(address(this), tasks[_taskIndex].freelancerAddress, tasks[_taskIndex].evaluatorReward + tasks[_taskIndex].freelancerReward));
 
         if(freelancers[tasks[_taskIndex].freelancerAddress].reputation < 10){
             freelancers[tasks[_taskIndex].freelancerAddress].reputation += 1;
