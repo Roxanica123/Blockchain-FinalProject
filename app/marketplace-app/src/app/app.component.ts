@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TokensService } from './services/tokens.service';
 import { UserService } from './services/user.service';
 import { UserInfo, USER_STATICS } from './types/user-info';
 
@@ -10,7 +11,7 @@ import { UserInfo, USER_STATICS } from './types/user-info';
 export class AppComponent implements OnInit {
   private user: UserInfo = USER_STATICS.EMPTY_USER;
 
-  constructor(private readonly userService: UserService) { }
+  constructor(private readonly userService: UserService, private readonly tokensService:TokensService) { }
   
   public ngOnInit(): void {
     this.userService.userObservable().subscribe(user => this.user = user);

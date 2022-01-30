@@ -1,9 +1,10 @@
 import { Injectable, NgZone } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Role, UserInfo } from '../types/user-info';
+import { Role, UserInfo, USER_STATICS } from '../types/user-info';
 import { Evaluator, Freelancer, Investor, Manager } from '../types/user-types';
 import { ContractCallService } from './contracts-call.service';
 import { ContractsService } from './contracts.service';
+import { TokensService } from './tokens.service';
 declare let window: any;
 
 @Injectable({
@@ -16,8 +17,9 @@ export class UserService {
   constructor(
     private readonly contractsService: ContractsService,
     private readonly txService: ContractCallService,
-    private readonly ngZone: NgZone) {
-    this.user = new BehaviorSubject<UserInfo>({ address: "", role: Role.NONE, name: "" });
+    private readonly ngZone: NgZone,
+    private readonly tokensService: TokensService) {
+    this.user = new BehaviorSubject<UserInfo>(USER_STATICS.EMPTY_USER);
 
     window.ethereum.on('accountsChanged', async (accs: string[]) => await this.login());
     this.login();
@@ -43,22 +45,23 @@ export class UserService {
   }
 
   private async addInfo(address: string, role: Role): Promise<UserInfo> {
+    const tokens: number = await this.tokensService.getUserTokens(address);
     switch (role) {
       case Role.MANAGER:
         const managerInfo = await this.txService.call<Manager>(this.mp, "managers", [address]);
-        return { address: address, role: role, name: managerInfo.name };
+        return { address: address, role: role, name: managerInfo.name, tokens: tokens };
       case Role.INVESTOR:
         const investorInfo = await this.txService.call<Investor>(this.mp, "investors", [address]);
-        return { address: address, role: role, name: investorInfo.name };
+        return { address: address, role: role, name: investorInfo.name, tokens: tokens };
       case Role.EVALUATOR:
         const evaluatorInfo = await this.txService.call<Evaluator>(this.mp, "evaluators", [address]);
-        return { address: address, role: role, name: evaluatorInfo.name, domainExpertise: evaluatorInfo.domainExpertise };
+        return { address: address, role: role, name: evaluatorInfo.name, domainExpertise: evaluatorInfo.domainExpertise, tokens: tokens };
       case Role.FREELANCER:
         const freelancerInfo = await this.txService.call<Freelancer>(this.mp, "freelancers", [address]);
-        return { address: address, role: role, name: freelancerInfo.name, domainExpertise: freelancerInfo.domainExpertise };
+        return { address: address, role: role, name: freelancerInfo.name, domainExpertise: freelancerInfo.domainExpertise, tokens: tokens };
       default:
         console.log("big shit happen")
-        return { address: address, role: role, name: "" }
+        return { address: address, role: role, name: "", tokens: tokens }
     }
   }
 

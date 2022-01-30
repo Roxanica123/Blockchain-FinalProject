@@ -15,4 +15,18 @@
             {{roleOf(user.role)}}
         </div>
     </div>
+
+    <div *ngIf="loggedIn" class="tokens-container flex-row">
+        <div><label>Tokens:</label>
+            {{user.tokens}}
+        </div>
+        <div class="buy-tokens-container flex-row">
+            <button mat-raised-button color="accent" (click)="buyTokens()">Buy Tokens!</button>
+            <div>
+                <mat-form-field class="example-full-width" appearance="fill">
+                    <input matInput maxlength="18" placeholder="Number of tokens" [(ngModel)]="tokensNumber">
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
 </div>
