@@ -1,5 +1,5 @@
 <div class="container flex-column flex-center">
-    <div class="view">
+    <div class="view" *ngIf="isTimeToPickFreelancer()">
         <mat-card>
             <mat-card-title>Freelancer Applicants</mat-card-title>
             <mat-card-content>
@@ -33,7 +33,7 @@
             </mat-card-content>
         </mat-card>
     </div>
-    <div class="view">
+    <div class="view" *ngIf="isTimeToPickEvaluator()">
         <mat-card>
             <mat-card-title>Available Evaluators</mat-card-title>
             <mat-card-content>
@@ -61,6 +61,27 @@
                 </table>
             </mat-card-content>
         </mat-card>
+    </div>
+
+
+    <div class="view" *ngIf="isTimeForApprovel()"> 
+
+        <mat-card>
+            <mat-card-title></mat-card-title>
+            <mat-card-content>
+                <div class="flex-row flex-center" >
+                    <div class="selection-item">
+                        <button mat-raised-button color="accent" (click)="approveWork()">Approve the work</button>
+                    </div>
+                    <div class="selection-item">
+                        <button mat-raised-button color="accent" (click)="rejectWork()">Reject the work</button>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+
+
+
     </div>
     <div *ngIf="task!.state == 0" class="flex-row flex-start container delete-field m16">
         <div class="text-center m16">

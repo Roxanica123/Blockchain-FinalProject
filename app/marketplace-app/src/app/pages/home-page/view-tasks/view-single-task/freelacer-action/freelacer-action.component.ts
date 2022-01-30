@@ -61,5 +61,9 @@ export class FreelacerActionComponent implements OnInit {
     return this.task?.state == TaskState.FREELANCERS_APPLICATIONS;
   }
 
+  public isTaskinProgress():boolean{
+    return this.task?.state == TaskState.IN_PROGRESS;
+  }
+
 
 }
