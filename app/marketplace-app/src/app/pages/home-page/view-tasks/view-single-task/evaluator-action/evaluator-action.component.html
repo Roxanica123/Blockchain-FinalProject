@@ -1,1 +1,15 @@
-<p>evaluator-action works!</p>
+<div  *ngIf="isTaskinWaitingForArbitrage()">
+    <mat-card>
+        <mat-card-title></mat-card-title>
+        <mat-card-content>
+            <div class="flex-row flex-center" >
+                <div class="selection-item">
+                    <button mat-raised-button color="accent" (click)="approveWork()">Approve the work</button>
+                </div>
+                <div class="selection-item">
+                    <button mat-raised-button color="accent" (click)="rejectWork()">Reject the work</button>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

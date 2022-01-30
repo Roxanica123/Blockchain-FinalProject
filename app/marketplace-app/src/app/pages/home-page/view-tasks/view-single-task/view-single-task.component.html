@@ -93,7 +93,7 @@
         <app-freelacer-action [task]="task"></app-freelacer-action>
     </div>
     <div *ngIf="isEvaluator()">
-        <app-evaluator-action></app-evaluator-action>
+        <app-evaluator-action [task]="task"></app-evaluator-action>
     </div>
     <div *ngIf="isInvestor()">
         <app-investor-action [task]="task"></app-investor-action>
