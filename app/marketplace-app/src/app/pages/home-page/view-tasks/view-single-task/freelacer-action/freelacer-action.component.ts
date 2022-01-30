@@ -23,7 +23,8 @@ export class FreelacerActionComponent implements OnInit {
     private readonly userService: UserService,
     private readonly txService: ContractCallService,
     private readonly snackService: SnackService,
-    private readonly contractsService: ContractsService
+    private readonly contractsService: ContractsService,
+    private readonly taskState: TaskStateService
   ) {
 
 
@@ -38,12 +39,17 @@ export class FreelacerActionComponent implements OnInit {
 
   public async applyForATask() {
     const taskIndex = this.task?.index;
+    await this.txService.send(this.contractsService.marketplaceTokenContract, "approve", [this.contractsService.getMarketplaceAddress(), this.task!.evaluatorReward], this.user.address)
     await this.txService.send(this.mp, "applyForATask", [taskIndex], this.user.address);
+    await this.taskState.updateTaskWithIndex(this.task!.index);
+    this.snackService.info("Sucesfully applied!");
   }
 
   public async declareTaskFinished() {
     const taskIndex = this.task?.index;
     await this.txService.send(this.mp, "declareTaskFinished", [taskIndex], this.user.address);
+    await this.taskState.updateTaskWithIndex(this.task!.index);
+    this.snackService.info("Sucesfully finished task!");
   }
 
   private get mp(): any {
