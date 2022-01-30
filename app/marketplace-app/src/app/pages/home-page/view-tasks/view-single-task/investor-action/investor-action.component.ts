@@ -29,6 +29,7 @@ export class InvestorActionComponent implements OnInit {
   }
 
   public async ok(): Promise<void> {
+    await this.tx.send(this.contracts.marketplaceTokenContract, "approve", [this.contracts.getAddress(this.contracts.marketplaceContract)], this.user.address)
     await this.tx.send(this.contracts.marketplaceContract, "fundTask", [this.task!.index, 1], this.user.address);
   }
 
