@@ -3,7 +3,6 @@ import {DomainExpertise, TaskState} from "./user-info"
 export class Manager {
     name!: string;
     managerAddress!: string;
-    exists!: boolean;
 }
 
 export class Freelancer {
@@ -11,20 +10,17 @@ export class Freelancer {
     domainExpertise!: string;
     reputation!: number;
     freelancerAddress!: string;
-    exists!: boolean;
 }
 
 export class Evaluator {
     name!: string;
     domainExpertise!: string;
     evaluatorAddress!: string;
-    exists!: boolean;
 }
 
 export class Investor {
     name!: string;
     investorAddress!: string;
-    exists!: boolean;
 }
 
 
