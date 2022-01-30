@@ -114,15 +114,12 @@ export class ManagerActionComponent implements OnInit, OnDestroy {
   public async approveWork(){
     await this.tx.send(this.contracts.marketplaceContract, "approveTask", [this.task?.index], this.user.address);
     await this.taskState.updateTaskWithIndex(this.task!.index);
-
     this.snack.info(`The work has been finished!`);
   }
 
   public async rejectWork(){
     await this.tx.send(this.contracts.marketplaceContract, "rejectTask", [this.task?.index], this.user.address);
     await this.taskState.updateTaskWithIndex(this.task!.index);
-
-
     this.snack.info(`Moving task to arbitrage.`);
   }
 
