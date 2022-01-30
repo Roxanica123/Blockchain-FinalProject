@@ -24,5 +24,9 @@ export class ContractsService {
     return contract.networks[keys[0]].address;
   }
 
+  getMarketplaceAddress(){
+    return this.getAddress(Marketplace);
+  }
+
 }
 

@@ -41,6 +41,14 @@ export class TaskStateService {
         this.router.navigate(["view-task"]);
     }
 
+    public async updateTaskWithIndex(index:Number){
+        const updatedTask = await this.getTask(index);
+        this.task.next(updatedTask);
+        const updateIndex = this.tasks.value.indexOf(this.tasks.value.filter(task=>task.index == index)[0]);
+        this.tasks.value[updateIndex] = updatedTask;
+        this.tasks.next(this.tasks.value);
+    }
+
     public updateData(): void {
         this.emitter.next();
     }

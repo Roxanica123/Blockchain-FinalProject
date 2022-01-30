@@ -1,1 +1,21 @@
-<button mat-raised-button color="accent" (click)="ok()"> WORKS </button>
+<div class="buttons-container flex-between flex-row">
+
+    <div class="fund-wrapper flex-column m16">
+        <button mat-raised-button color="accent" (click)="fundTask()"> Fund task </button>
+        <div>
+            <mat-form-field class="example-full-width" appearance="fill">
+                <input matInput maxlength="18" placeholder="Number of tokens" [(ngModel)]="fundAmount">
+            </mat-form-field>
+        </div>
+
+    </div>
+    <div class="take-fund-wrapper flex-column m16">
+        <button mat-raised-button color="accent" (click)="takeBackFunding()"> Take Back Funding </button>
+        <mat-form-field class="example-full-width" appearance="fill">
+            <div>
+                <input matInput maxlength="18" placeholder="Number of tokens" [(ngModel)]="takeBackFundAmount">
+            </div>
+
+        </mat-form-field>
+    </div>
+</div>
