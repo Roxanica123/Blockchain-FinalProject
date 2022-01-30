@@ -34,27 +34,8 @@ contract MarketplaceToken {
         return _decimals;
     }
 
-    function _mint(address account, uint256 amount) internal virtual {
-        require(account != address(0), "ERC20: mint to the zero address");
-
-        totalSupply = totalSupply.add(amount);
-        balanceOf[account] = balanceOf[account].add(amount);
-        emit Transfer(address(0), account, amount);
-    }
-
-    function transfer(address _to, uint256 _value) public returns (bool success) {
-        require(balanceOf[msg.sender] >= _value);
-
-        balanceOf[msg.sender] = balanceOf[msg.sender].sub(_value);
-        balanceOf[_to] = balanceOf[_to].add(_value);
-
-        emit Transfer(msg.sender, _to, _value);
-        return true;
-    }
-
     function approve(address _spender, uint256 _value) public returns (bool success) {
-        allowance[msg.sender][_spender] = _value;
-        emit Approval(msg.sender, _spender, _value);
+        _approve(msg.sender, _spender, _value);
         return true;
     }
 
@@ -62,10 +43,9 @@ contract MarketplaceToken {
         require(_value <= balanceOf[_from]);
         require(_value <= allowance[_from][msg.sender]);
 
-        balanceOf[_from] = balanceOf[_from].sub(_value);
-        balanceOf[_to] = balanceOf[_to].add(_value);
-        allowance[_from][msg.sender] =  allowance[_from][msg.sender].sub(_value);
-        emit Transfer(_from, _to, _value);
+        _transfer(_from, _to, _value);
+        _approve(_from, msg.sender, allowance[_from][msg.sender].sub(_value));
+    
         return true;
     }
 
@@ -74,4 +54,21 @@ contract MarketplaceToken {
         return transferFrom(address(this), recipient, amount);
     }
 
+    function _transfer(address sender, address recipient, uint256 amount) internal virtual {
+
+        balanceOf[sender] = balanceOf[sender].sub(amount);
+        balanceOf[recipient] = balanceOf[recipient].add(amount);
+        emit Transfer(sender, recipient, amount);
+    }
+
+    function _approve(address owner, address spender, uint256 amount) internal virtual {
+        allowance[owner][spender] = amount;
+    }
+
+    function _mint(address account, uint256 amount) internal virtual {
+        require(account != address(0), "ERC20: mint to the zero address");
+
+        totalSupply = totalSupply.add(amount);
+        balanceOf[account] = balanceOf[account].add(amount);
+    }
 }

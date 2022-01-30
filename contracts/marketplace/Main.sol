@@ -159,10 +159,9 @@ contract Marketplace {
         require(_taskIndex < tasksCount, "Task index does not exist"); 
         require(tasks[_taskIndex].state == TaskState.WAITING_FOR_FUNDING, "Task does not accept funding");
         require(_amount > 0, "You have to invest something tho");
-        require(tasks[_taskIndex].currentFunding + _amount > tasks[_taskIndex].evaluatorReward + tasks[_taskIndex].freelancerReward);
+        require(tasks[_taskIndex].currentFunding + _amount <= tasks[_taskIndex].evaluatorReward + tasks[_taskIndex].freelancerReward);
         
-        //?require(token.approve(msg.sender, _amount));
-        require(token.transferFrom(msg.sender, address(this), _amount));
+        token.transferFrom(msg.sender, address(this), _amount);
 
         uint256 investorIndex = investorIndexForTask(_taskIndex, msg.sender);
         if(investorIndex == 0){
@@ -200,7 +199,6 @@ contract Marketplace {
         
         require(investorIndex!=0 && taskFundings[_taskIndex][investorIndex].amount >= _amount, "You did not contributed with that");
         
-        //?require(token.approve(msg.sender, _amount));
         require(token.transferFrom(address(this), msg.sender, _amount));
 
         taskFundings[_taskIndex][investorIndex].amount -= _amount;
