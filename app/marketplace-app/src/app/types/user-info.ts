@@ -14,12 +14,11 @@ export interface UserInfo {
     address: string;
     role: Role;
     name: string;
-    tokens: number
     domainExpertise?: string;
     reputation?: number;
 }
 
 export class USER_STATICS {
-    public static EMPTY_USER: UserInfo = { address: "", role: Role.UNAUTHORIZED, name: "", tokens:0 };
+    public static EMPTY_USER: UserInfo = { address: "", role: Role.UNAUTHORIZED, name: "" };
 
 }

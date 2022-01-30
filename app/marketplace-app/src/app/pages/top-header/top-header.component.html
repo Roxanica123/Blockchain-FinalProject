@@ -5,7 +5,7 @@
         </h1>
     </div>
 
-    <div *ngIf="loggedIn" class="user-info-container flex-column flex-start">
+    <div *ngIf="loggedIn" class="user-info-container flex-row flex-start">
         <div class="user-info">
             <label>Name:</label>
             {{user.name}}
@@ -14,11 +14,15 @@
             <label>Role:</label>
             {{roleOf(user.role)}}
         </div>
+        <div *ngIf="hasDomainExpertise" class="user-info">
+            <label>Domain:</label>
+            {{domainExpertiseOf(user.domainExpertise)}}
+        </div>
     </div>
 
     <div *ngIf="loggedIn" class="tokens-container flex-row">
         <div><label>Tokens:</label>
-            {{user.tokens}}
+            {{userTokensNumber}}
         </div>
         <div class="buy-tokens-container flex-row">
             <button mat-raised-button color="accent" (click)="buyTokens()">Buy Tokens!</button>
