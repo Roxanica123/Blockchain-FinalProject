@@ -1,15 +1,10 @@
 <div *ngIf="task === undefined">
     <p>no task selected</p>
 </div>
-
 <div *ngIf="task !== undefined">
-
     <mat-card>
-
         <mat-card-title>Address</mat-card-title>
         <mat-card-content>
-
-
             <table mat-table [dataSource]="[task]" class="mat-elevation-z8">
 
                 <ng-container matColumnDef="evaluatorAddress">
@@ -34,16 +29,9 @@
         </mat-card-content>
 
     </mat-card>
-
-
-
     <mat-card>
-
         <mat-card-title>Task details</mat-card-title>
-        <mat-card-subtitle></mat-card-subtitle>
         <mat-card-content>
-
-
             <table mat-table [dataSource]="[task]" class="mat-elevation-z8">
 
 
@@ -95,37 +83,19 @@
                 <tr mat-header-row *matHeaderRowDef="displayInfo"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayInfo;"></tr>
             </table>
-
         </mat-card-content>
-
     </mat-card>
-
-
-
-
+    
     <div *ngIf="isManager()">
-
        <app-manager-action [task]="task"></app-manager-action>
-
     </div>
-
     <div *ngIf="isFreelancer()">
-
-        FREELANCER
         <app-freelacer-action [task]="task"></app-freelacer-action>
     </div>
-
     <div *ngIf="isEvaluator()">
-
-        EVALUATOR
         <app-evaluator-action></app-evaluator-action>
     </div>
-
     <div *ngIf="isInvestor()">
-
-        INVESTOR
         <app-investor-action [task]="task"></app-investor-action>
-
     </div>
-
 </div>
