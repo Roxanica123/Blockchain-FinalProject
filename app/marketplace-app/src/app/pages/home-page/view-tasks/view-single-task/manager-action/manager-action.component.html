@@ -1,1 +1,39 @@
-<p>manager-action works!</p>
+<div class="container flex-column flex-center">
+    <div class="applicants-view">
+        <mat-card>
+            <mat-card-title>Freelancer Applicants</mat-card-title>
+            <mat-card-content>
+                <table mat-table [dataSource]="applicants" class="mat-elevation-z8">
+
+                    <ng-container matColumnDef="name">
+                        <th mat-header-cell *matHeaderCellDef> Name </th>
+                        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="domainExpertise">
+                        <th mat-header-cell *matHeaderCellDef> Domain Expertise </th>
+                        <td mat-cell *matCellDef="let element"> {{roleOf(element.domainExpertise)}} </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="accept">
+                        <th mat-header-cell *matHeaderCellDef> Accept applicant </th>
+                        <td mat-cell *matCellDef="let element;index">
+                            <button mat-raised-button color="accent" (click)="acceptApplicant(element)">Accept</button>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="applicantsColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: applicantsColumns;"></tr>
+                </table>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <div *ngIf="task!.state == 0" class="flex-row flex-start container delete-field m16">
+        <div class="text-center m16">
+            <p><i>This task is still in waiting for funding so it can be deleted</i></p>
+        </div>
+        <div class="m16">
+            <button mat-raised-button color="accent" (click)="delete()">Delete task</button>
+        </div>
+    </div>
+</div>

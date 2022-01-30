@@ -41,12 +41,10 @@ export class TopHeaderComponent implements OnInit {
     this.router.navigate([""]);
   }
 
-  public async buyTokens(): Promise<void>{
+  public async buyTokens(): Promise<void> {
     console.log(this.tokensNumber)
     await this.tokensService.buyTokens(this._user.address, this.tokensNumber);
     this.userService.refresh();
+    this.tokensNumber = 0;
   }
 }
-
-
-
