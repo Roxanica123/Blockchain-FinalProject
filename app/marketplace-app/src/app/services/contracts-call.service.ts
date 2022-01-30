@@ -16,7 +16,7 @@ export class ContractCallService {
 
     public async call<T>(contract: any, method: string, methodArguments: any[]): Promise<T> {
         try {
-            return await this.TryThreeTimes(async () => await contract.methods[method](...methodArguments).call());
+            return await this.TryThreeTimes(async () => await contract.methods[method](...methodArguments).call(), 3);
         }
         catch (err: any) {
             console.log(err);
@@ -33,7 +33,7 @@ export class ContractCallService {
 
     public async send(contract: any, method: string, methodArguments: any[], fromAddress: string): Promise<void> {
         try {
-            await this.TryThreeTimes(async () => await contract.methods[method](...methodArguments).send({ from: fromAddress }));
+            await this.TryThreeTimes(async () => await contract.methods[method](...methodArguments).send({ from: fromAddress }), 1);
         }
         catch (err: any) {
             console.log(err);
@@ -48,9 +48,9 @@ export class ContractCallService {
         }
     }
 
-    private async TryThreeTimes<T>(func: Function): Promise<T> {
+    private async TryThreeTimes<T>(func: Function, attempts: number): Promise<T> {
         let err;
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < attempts; i++) {
             try {
                 const result = await func();
                 return result;

@@ -44,7 +44,10 @@ export class InvestorActionComponent implements OnInit {
   }
 
   public async takeBackFunding(): Promise<void> {
-    const marketplaceContractAddress = this.contracts.getMarketplaceAddress();
+    await this.tx.send(this.contracts.marketplaceContract, "takeBackFunding", [this.task!.index, this.takeBackFundAmount], this.user.address);
+    this.snack.info(`You took ${this.takeBackFundAmount} tokens back from this task!`);
+    this.takeBackFundAmount = 0;
+    await this.tasksService.updateTaskWithIndex(this.task!.index);
   }
 
 }
