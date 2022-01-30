@@ -1,10 +1,21 @@
 
-<div class="flex-row flex-center">
+
+<div *ngIf="!isTaskReadyToAsignUser()" class="flex-row flex-center">
+
     <div class="selection-item">
         <button mat-raised-button color="accent" (click)="applyForATask()">Apply for this task</button>
     </div>
-    <div class="selection-item">
-        <button mat-raised-button color="accent" (click)="declareTaskFinished()">Declare this task finished</button>
-    </div>
-
 </div>
+
+
+
+    <!-- <div class="flex-row flex-center">
+   
+        <div class="selection-item">
+            <button mat-raised-button color="accent" (click)="declareTaskFinished()">Declare this task finished</button>
+        </div>
+    </div>
+    -->
+
+
+

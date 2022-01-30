@@ -4,7 +4,7 @@ import { ContractsService } from 'src/app/services/contracts.service';
 import { SnackService } from 'src/app/services/snack.service';
 import { TaskStateService } from 'src/app/services/task-state.service';
 import { UserService } from 'src/app/services/user.service';
-import { UserInfo, USER_STATICS } from 'src/app/types/user-info';
+import { TaskState, UserInfo, USER_STATICS } from 'src/app/types/user-info';
 import { ContractTask } from 'src/app/types/user-types';
 
 @Component({
@@ -49,5 +49,11 @@ export class FreelacerActionComponent implements OnInit {
   private get mp(): any {
     return this.contractsService.marketplaceContract;
   }
+
+
+  public isTaskReadyToAsignUser():boolean{
+    return this.task?.state == TaskState.FREELANCERS_APPLICATIONS;
+  }
+
 
 }
