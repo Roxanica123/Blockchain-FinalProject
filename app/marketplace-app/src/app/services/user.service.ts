@@ -37,6 +37,7 @@ export class UserService {
   public async updateUserInfo(address: string) {
     const role: string = await this.contractsService.marketplaceContract.methods['getUserRole'](address).call();
     const newUser = await this.addInfo(address, Number(role));
+    await this.tokensService.refresh(address);
     this.ngZone.run(() => this.user.next(newUser));
   }
 
@@ -45,23 +46,23 @@ export class UserService {
   }
 
   private async addInfo(address: string, role: Role): Promise<UserInfo> {
-    const tokens: number = await this.tokensService.getUserTokens(address);
+    //const tokens: number = await this.tokensService.getUserTokens(address);
     switch (role) {
       case Role.MANAGER:
         const managerInfo = await this.txService.call<Manager>(this.mp, "managers", [address]);
-        return { address: address, role: role, name: managerInfo.name, tokens: tokens };
+        return { address: address, role: role, name: managerInfo.name};
       case Role.INVESTOR:
         const investorInfo = await this.txService.call<Investor>(this.mp, "investors", [address]);
-        return { address: address, role: role, name: investorInfo.name, tokens: tokens };
+        return { address: address, role: role, name: investorInfo.name};
       case Role.EVALUATOR:
         const evaluatorInfo = await this.txService.call<Evaluator>(this.mp, "evaluators", [address]);
-        return { address: address, role: role, name: evaluatorInfo.name, domainExpertise: evaluatorInfo.domainExpertise, tokens: tokens };
+        return { address: address, role: role, name: evaluatorInfo.name, domainExpertise: evaluatorInfo.domainExpertise };
       case Role.FREELANCER:
         const freelancerInfo = await this.txService.call<Freelancer>(this.mp, "freelancers", [address]);
-        return { address: address, role: role, name: freelancerInfo.name, domainExpertise: freelancerInfo.domainExpertise, tokens: tokens };
+        return { address: address, role: role, name: freelancerInfo.name, domainExpertise: freelancerInfo.domainExpertise};
       default:
         console.log("big shit happen")
-        return { address: address, role: role, name: "", tokens: tokens }
+        return { address: address, role: role, name: "" }
     }
   }
 
