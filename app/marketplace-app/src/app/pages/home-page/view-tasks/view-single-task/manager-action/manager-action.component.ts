@@ -52,6 +52,10 @@ export class ManagerActionComponent implements OnInit, OnDestroy {
     return Role[role];
   }
 
+  public async delete():Promise<void> {
+
+  }
+
   private loadApplications(): void {
     // retrieve from blockchain
     // const res = this.tx.call(this.contracts.marketplaceContract, "taskApplications", [this.task!.index]);

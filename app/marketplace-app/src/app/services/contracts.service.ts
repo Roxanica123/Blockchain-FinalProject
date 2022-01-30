@@ -8,6 +8,7 @@ import Token from '@assets/contracts/MarketplaceToken.json';
   providedIn: 'root'
 })
 export class ContractsService {
+  
   public readonly web3: Web3;
   public readonly marketplaceContract: any;
   public readonly marketplaceTokenContract: any;

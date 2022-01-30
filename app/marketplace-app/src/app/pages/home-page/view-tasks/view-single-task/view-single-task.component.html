@@ -118,13 +118,13 @@
     <div *ngIf="isEvaluator()">
 
         EVALUATOR
-        <app-evaluator-action ></app-evaluator-action>
+        <app-evaluator-action></app-evaluator-action>
     </div>
 
     <div *ngIf="isInvestor()">
 
         INVESTOR
-        <app-investor-action></app-investor-action>
+        <app-investor-action [task]="task"></app-investor-action>
 
     </div>
 
