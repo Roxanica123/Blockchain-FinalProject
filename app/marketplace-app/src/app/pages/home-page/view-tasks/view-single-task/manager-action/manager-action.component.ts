@@ -72,7 +72,8 @@ export class ManagerActionComponent implements OnInit, OnDestroy {
   }
 
   public async delete(): Promise<void> {
-
+    await this.tx.send(this.contracts.marketplaceContract, "deteleTask", [this.task!.index], this.user.address);
+    this.snack.info(`The task has been deleted`);
   }
 
   private async loadApplications(): Promise<void> {

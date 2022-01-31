@@ -221,10 +221,11 @@ contract Marketplace {
         for (uint256 i = 0; i < tasks[_taskIndex].investorsCount; i++) {
 
             if(taskFundings[_taskIndex][i].amount > 0){
-                require(token.transferFrom(address(this), taskFundings[_taskIndex][i].investorAddress, taskFundings[_taskIndex][i].amount));
+                token.approve(address(this), taskFundings[_taskIndex][i].amount);
+                token.transferFrom(address(this), taskFundings[_taskIndex][i].investorAddress, taskFundings[_taskIndex][i].amount);
             }
         }
-
+        tasks[_taskIndex].currentFunding = 0;
         tasks[_taskIndex].state = TaskState.DELETED;
     }
 
@@ -249,8 +250,10 @@ contract Marketplace {
         tasks[_taskIndex].freelancerAddress = taskApplications[_taskIndex][_applicationIndex];
 
         for (uint256 i = 0; i < tasks[_taskIndex].applicationsCount; i++) {
-             token.approve(address(this), tasks[_taskIndex].evaluatorReward);
-             require(token.transferFrom(address(this), taskApplications[_taskIndex][i], tasks[_taskIndex].evaluatorReward));
+            if(i!=_applicationIndex){
+               token.approve(address(this), tasks[_taskIndex].evaluatorReward);
+               require(token.transferFrom(address(this), taskApplications[_taskIndex][i], tasks[_taskIndex].evaluatorReward));
+            }
         }
 
         tasks[_taskIndex].freelancerAddress = taskApplications[_taskIndex][_applicationIndex];
