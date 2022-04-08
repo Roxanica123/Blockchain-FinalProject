@@ -24,7 +24,6 @@ export class EvaluatorActionComponent implements OnInit {
   
 
   constructor(
-
     private readonly userService: UserService,
     private readonly tx: ContractCallService,
     private readonly contracts: ContractsService,

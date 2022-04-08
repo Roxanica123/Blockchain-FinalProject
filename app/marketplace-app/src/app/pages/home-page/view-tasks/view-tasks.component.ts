@@ -16,7 +16,7 @@ export class ViewTasksComponent implements OnInit {
   public data: ContractTask[] = [];
 
   constructor(private readonly taskState: TaskStateService,) {
-    
+
   }
 
   ngOnInit(): void {

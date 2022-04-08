@@ -7,7 +7,7 @@ import Token from '@assets/contracts/MarketplaceToken.json';
 @Injectable({
   providedIn: 'root'
 })
-export class ContractsService {
+export class ContractsService { 
   
   public readonly web3: Web3;
   public readonly marketplaceContract: any;
